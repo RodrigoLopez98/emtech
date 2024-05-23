@@ -9,7 +9,7 @@ import design2 from './assets/Dot Pattern2.png';
 import logoFooter from './assets/logo-footer.png';
 import facebook from './assets/facebook.svg';
 import instagram from './assets/instagram.svg';
-import menu from './assets/menu.svg'
+import menu from './assets/menu.svg';
 
 Modal.setAppElement('#root');
 
@@ -265,6 +265,34 @@ function App() {
             <h1>Bienvenido a Lorem Ipsum</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non est sed ante tempus egestas. Aliquam erat volutpat. Quisque commodo nisi vitae sapien fermentum.</p>
             <button id='contac-movil'>Contáctanos</button>
+          </div>
+          <img src={design} id='design' alt="puntitos" />
+          <div className='personajes-movil'>
+            <h1>Conoce a nuestros principales personajes</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non est sed ante tempus egestas. Aliquam erat volutpat. Quisque commodo nisi vitae sapien fermentum,</p>
+            <section>
+              {data?.map((character) => (
+                <div
+                  key={character.id}
+                  onMouseEnter={() => handleMouseEnter(character.id)}
+                  onMouseLeave={() => handleMouseLeave(character.id)}
+                >
+                  <img src={character.image} alt="" />
+                  <label>
+                    {hoveredCards[character.id] ? (
+                      <>
+                        <span>{character.species}</span>
+                        <span>{character.status}</span>
+                        <span>{character.gender}</span>
+                      </>
+                    ) : (
+                      splitName(character.name)
+                    )}
+                  </label>
+                </div>
+              ))}
+            </section>
+            <button>Contáctanos</button>
           </div>
         </main>
       </div>
