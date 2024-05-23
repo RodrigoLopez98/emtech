@@ -9,6 +9,7 @@ import design2 from './assets/Dot Pattern2.png';
 import logoFooter from './assets/logo-footer.png';
 import facebook from './assets/facebook.svg';
 import instagram from './assets/instagram.svg';
+import menu from './assets/menu.svg'
 
 Modal.setAppElement('#root');
 
@@ -246,6 +247,26 @@ function App() {
           <img src={logoFooter} alt="logo" />
           <label>Emerging Technologies Institute | All Rights Reserved</label>
         </footer>
+      </div>
+      <div className='movil'>
+        <header>
+          <img src={logo} alt="" />
+          <button>
+            <img src={menu} alt="" />
+          </button>
+        </header>
+        <main>
+          <div className='bienvenida-movil'>
+            <div className='button-play-video'>
+              <button>
+                <img src={iconoPlay} alt="" />
+              </button>
+            </div>
+            <h1>Bienvenido a Lorem Ipsum</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non est sed ante tempus egestas. Aliquam erat volutpat. Quisque commodo nisi vitae sapien fermentum.</p>
+            <button id='contac-movil'>Contáctanos</button>
+          </div>
+        </main>
       </div>
       <Modal
         isOpen={modalIsOpen}
