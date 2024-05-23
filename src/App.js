@@ -19,6 +19,7 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [characters, setCharacters] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -122,7 +123,9 @@ function App() {
     );
   };
 
-
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
+  };
 
   return (
     <>
@@ -277,22 +280,29 @@ function App() {
                   onMouseEnter={() => handleMouseEnter(character.id)}
                   onMouseLeave={() => handleMouseLeave(character.id)}
                 >
-                  <img src={character.image} alt="" />
-                  <label>
-                    {hoveredCards[character.id] ? (
-                      <>
+                  <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+                    <div className="card-inner">
+                      <div className="card-front">
+                        <img src={character.image} alt="" />
+                        <label>{splitName(character.name)}</label>
+                      </div>
+                      <div className="card-back">
                         <span>{character.species}</span>
                         <span>{character.status}</span>
                         <span>{character.gender}</span>
-                      </>
-                    ) : (
-                      splitName(character.name)
-                    )}
-                  </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </section>
             <button>Contáctanos</button>
+          </div>
+          <div className='carrusel-movil'>
+            <label>
+              <span>Conoce nuestro</span>
+              <span>carrusel de personajes</span>
+            </label>
           </div>
         </main>
       </div>

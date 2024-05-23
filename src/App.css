@@ -754,7 +754,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 22px;
-    height: inherit;
+    height: 70%;
     width: 100%;
     overflow-x: auto;
     padding: 0px 22px;
@@ -763,13 +763,36 @@
   .personajes-movil div {
     min-width: 80%;
     max-width: 80%;
-    height: 314px;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
     box-shadow: 0px 25px 30px 0px #7E7E7E26;
+  }
+
+  .personajes-movil div label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .personajes-movil div label span:nth-child(1) {
+    font-family: "Asap", sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 25px;
+    color: #000000B2;
+  }
+
+  .personajes-movil div label span:nth-child(2) {
+    font-family: "Asap", sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 25px;
+    color: #25C7D9B2;
   }
 
   .personajes-movil img {
@@ -782,7 +805,7 @@
 
   .personajes-movil button {
     position: relative;
-    top: 25px;
+    top: 15px;
     width: 200px;
     height: 60px;
     border-radius: 16px;
@@ -794,5 +817,98 @@
     font-size: 20px;
     font-weight: 700;
     line-height: 24.36px;
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    /* Profundidad de la perspectiva para el efecto de 3D */
+    transition: transform 0.5s;
+  }
+
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    /* Para asegurar que los hijos se muestren en 3D */
+  }
+
+  .card.flipped .card-inner {
+    transform: rotateY(180deg);
+    /* Voltear la tarjeta hacia atrás */
+  }
+
+  .card-front,
+  .card-back {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    /* Ocultar la parte trasera cuando se está volteando */
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+    /* Inicialmente mostrar la parte trasera */
+  }
+
+  /* Estilos específicos para tu contenido */
+  .card-front img {
+    width: 100%;
+    height: auto;
+  }
+
+  .card-front label {
+    margin-top: 10px;
+  }
+
+  .card-back {
+    background-color: #25C7D9;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+
+  .card-back span:nth-child(2) {
+    font-weight: bold;
+  }
+
+  .card-back span {
+    margin-bottom: 5px;
+  }
+
+  .carrusel-movil {
+    width: 100%;
+    background-color: #f7f8fa;
+  }
+
+  .carrusel-movil label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .carrusel-movil label span:nth-child(1) {
+    font-family: "Asap", sans-serif;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 58px;
+    text-align: center;
+    color: #00215B;
+    margin-bottom: 20px;
+  }
+
+  .carrusel-movil label span:nth-child(2) {
+    font-family: "Asap", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 58px;
+    text-align: center;
+    color: #25C7D9;
   }
 }
