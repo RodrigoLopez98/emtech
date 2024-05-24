@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import YouTube from 'react-youtube';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
 import logo from './assets/Logo-emtech.png';
 import iconoPlay from './assets/play.svg';
@@ -17,9 +20,28 @@ function App() {
 
   const [hoveredCards, setHoveredCards] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpenMovil, setModalIsOpenMovil] = useState(false);
   const [characters, setCharacters] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [imagenes, setImagenes] = useState([]);
+  const [imagenActual, setImagenActual] = useState(null);
+
+  const [activeIndex2, setActiveIndex2] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveIndex2(prevIndex => (prevIndex === index ? null : index));
+  };
+
+  useEffect(() => {
+    fetch('https://rickandmortyapi.com/api/character/6,7,8,9,10,11,12,13,14,15,16,17')
+      .then(response => response.json())
+      .then(data => {
+        setImagenes(data);
+        setImagenActual(data[0]);
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }, []);
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -52,9 +74,26 @@ function App() {
     setModalIsOpen(false);
   };
 
+  const openModalMovil = () => {
+    setModalIsOpenMovil(true);
+  };
+
+  const closeModalMovil = () => {
+    setModalIsOpenMovil(false);
+  };
+
   const opts = {
     height: '480',
     width: '854',
+    playerVars: {
+      // https://www.youtube.com/watch?v=DlD2sZXR8RI
+      autoplay: 1,
+    },
+  };
+
+  const optsMovil = {
+    height: '250',
+    width: '350',
     playerVars: {
       // https://www.youtube.com/watch?v=DlD2sZXR8RI
       autoplay: 1,
@@ -126,6 +165,66 @@ function App() {
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      }
+    ],
+    afterChange: (index) => {
+      setImagenActual(imagenes[index]);
+    }
+  };
+
+  const items = [
+    {
+      title: 'Inicio',
+      content: '¿Quiénes somos?',
+      content2: '¿Qué hacemos?',
+      content3: '¿Cómo lo hacemos?'
+    },
+    {
+      title: 'Cursos',
+      content: 'Salesforce fos Success',
+      content2: 'Salesforce Analyst',
+      content3: 'Salesforce Administrator',
+      content4: 'Salesforce Developer'
+    },
+    {
+      title: 'El programa',
+      content: 'Características',
+      content2: 'Beneficios',
+      content3: 'Testimoniales',
+      content4: 'Nuestra Alianza'
+    },
+    {
+      title: 'Contáctanos',
+      content: 'Formulario de contacto',
+      content2: 'Síguenos en todas nuestras redes sociales.'
+    }
+  ];
 
   return (
     <>
@@ -261,7 +360,7 @@ function App() {
         <main>
           <div className='bienvenida-movil'>
             <div className='button-play-video'>
-              <button>
+              <button onClick={openModalMovil}>
                 <img src={iconoPlay} alt="" />
               </button>
             </div>
@@ -303,8 +402,47 @@ function App() {
               <span>Conoce nuestro</span>
               <span>carrusel de personajes</span>
             </label>
+            <div>
+              <Slider {...settings}>
+                {characters.map((character, index) => (
+                  <div key={index} className='container-imagen-movil'>
+                    <img src={character.image} alt={`Imagen ${index}`} />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+            <section>
+              {imagenActual && <p>{imagenActual.name}</p>}
+              <button>Ver más</button>
+            </section>
           </div>
         </main>
+        <footer>
+          <div className="accordion">
+            {items.map((item, index) => (
+              <div key={index} className="accordion-item">
+                <button
+                  className={`accordion-header ${activeIndex2 === index ? 'active' : ''}`}
+                  onClick={() => toggleAccordion(index)}
+                >
+                  {item.title}
+                </button>
+                {activeIndex2 === index && (
+                  <div className="accordion-content">
+                    <span>{item.content}</span>
+                    <span>{item.content2}</span>
+                    <span>{item.content3}</span>
+                    <span>{item.content4}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </footer>
+        <div className='footer-movil'>
+          <img src={logoFooter} alt="" />
+          <p>Emerging Technologies Institute | All Rights Reserved</p>
+        </div>
       </div>
       <Modal
         isOpen={modalIsOpen}
@@ -348,6 +486,49 @@ function App() {
           Cerrar
         </button>
         <YouTube videoId='DlD2sZXR8RI' opts={opts} />
+      </Modal>
+      <Modal
+        isOpen={modalIsOpenMovil}
+        onRequestClose={closeModalMovil}
+        contentLabel="YouTube Video Modal"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            zIndex: 1000,
+          },
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: 'transparent',
+            border: 'none',
+            padding: '0',
+            zIndex: 1001,
+          },
+        }}
+      >
+        <button
+          style={{
+            position: 'absolute',
+            top: 10,
+            right: 10,
+            zIndex: 1002,
+            background: 'white',
+            border: 'none',
+            padding: '5px 10px',
+            cursor: 'pointer',
+            backgroundColor: '#25C7D9',
+            color: '#fff',
+            borderRadius: '16px'
+          }}
+          onClick={closeModalMovil}
+        >
+          Cerrar
+        </button>
+        <YouTube videoId='DlD2sZXR8RI' opts={optsMovil} />
       </Modal>
     </>
   );

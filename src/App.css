@@ -769,7 +769,6 @@
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
-    box-shadow: 0px 25px 30px 0px #7E7E7E26;
   }
 
   .personajes-movil div label {
@@ -882,6 +881,8 @@
   }
 
   .carrusel-movil {
+    position: absolute;
+    top: 200%;
     width: 100%;
     background-color: #f7f8fa;
   }
@@ -891,24 +892,138 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 10px;
   }
 
   .carrusel-movil label span:nth-child(1) {
     font-family: "Asap", sans-serif;
-    font-size: 80px;
+    font-size: 35px;
     font-weight: 400;
-    line-height: 58px;
+    line-height: 35px;
     text-align: center;
     color: #00215B;
-    margin-bottom: 20px;
   }
 
   .carrusel-movil label span:nth-child(2) {
     font-family: "Asap", sans-serif;
-    font-size: 80px;
+    font-size: 35px;
     font-weight: 700;
-    line-height: 58px;
+    line-height: 30px;
     text-align: center;
     color: #25C7D9;
+  }
+
+  .container-imagen-movil {
+    width: 315px;
+    border-radius: 10px;
+    position: relative;
+    left: 10%;
+  }
+
+  .container-imagen-movil img {
+    border-radius: 10px;
+  }
+
+  .carrusel-movil section {
+    min-height: 200px;
+    max-height: 200px;
+    position: relative;
+    top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F7F8FA;
+  }
+
+  .carrusel-movil section p {
+    font-family: "Asap", sans-serif;
+    font-size: 70px;
+    font-weight: 700;
+    line-height: 70px;
+    text-align: center;
+    color: #0000001F;
+  }
+
+  .carrusel-movil section button {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    border-radius: 16px;
+    padding: 10px;
+    background-color: #25C7D9;
+    color: #fff;
+    border: 1px #25C7D9 solid;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.36px;
+    opacity: 0.8;
+  }
+
+  footer {
+    position: relative;
+    top: 187vh;
+    background-image: url(./assets/frontdebacground.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  footer button {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background: none;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  footer .acordion,
+  .accordion-item,
+  .accordion-header,
+  .accordion-content {
+    background: none;
+    border: none;
+  }
+
+  footer .acordion {
+    height: 300px;
+  }
+
+  .accordion-item {
+    margin: 0px 10px;
+  }
+
+  .accordion-content {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 20px;
+  }
+
+  .footer-movil {
+    position: relative;
+    top: 187vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .footer-movil img {
+    width: 200px;
+    height: 100px;
+  }
+
+  .footer-movil p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
   }
 }
